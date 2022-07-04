@@ -1,0 +1,350 @@
+:root {
+  --bgColor1: rgb(36, 37, 42);
+  --bgColor1Opacity: rgba(36, 37, 42, 0.8);
+  --bgColor2: rgb(48, 51, 57);
+  --bgColor2Opacity: rgba(48, 51, 57, 0.8);
+  --fontColor: rgba(255, 255, 255, 1);
+  --color1: rgb(5, 132, 163);
+  --color1Opacity: rgba(5, 132, 163, 0.8);
+  --color2: rgb(255, 153, 2);
+  --color2Opacity: rgba(255, 153, 2, 0.8);
+  --color3: rgb(254, 0, 153);
+  --color3Opacity: rgba(254, 0, 153, 0.8);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Fira Code", monospace;
+  background-color: var(--bgColor1);
+  color: var(--fontColor);
+  height: 1000vh;
+}
+
+/* MENU */
+
+.mainMenu {
+  padding: 20px 0;
+}
+.mainMenu h1{
+  text-align: center;
+  color: var(--color1);
+  cursor: pointer;
+}
+
+.mainMenu h1:hover {
+  text-align: center;
+  color: var(--color1Opacity);
+}
+/* MODULE CANVAS */
+.moduleCanvas {
+  margin: auto;
+}
+
+.moduleCanvas.toggle {
+  margin-left: 20%;
+}
+/* MODULE MENU */
+.moduleMenu {
+  display: none;
+}
+
+.moduleMenu.toggle {
+  display: block;
+  position: fixed;
+  height: 100%;
+  width: 20%;
+  left: 0;
+  background-color: var(--bgColor2);
+  z-index: 2;
+}
+
+/* MODULE MENU CLOSE BUTTON */
+.moduleMenuClose {
+  color: var(--color3Opacity);
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.moduleMenuClose:hover {
+  color: var(--color3);
+}
+
+/* MODULE CONTAINER */
+.moduleContainer p {
+  padding: 20px 0;
+  text-align: center;
+}
+
+/* MODULE BOX */
+.moduleBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+}
+
+.moduleBox div {
+  height: 150px;
+  width: 100%;
+  background-color: var(--bgColor1);
+}
+
+.moduleBox div:hover {
+  height: 150px;
+  width: 100%;
+  background-color: var(--color3Opacity);
+}
+
+/* MODULE ITEM */
+.moduleItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    color: var(--fontColor);
+    cursor: pointer;
+}   
+
+/* ADD SECTION CONTAINER */
+.addSectionContainer {
+  background-color: var(--bgColor1Opacity);
+  position: fixed;
+  width: 100%;
+  height: 120px;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 3;
+}
+
+/* ADD SECTION BUTTON */
+.addSection {
+  color: var(--color1Opacity);
+  font-size: 50px;
+  cursor: pointer;
+}
+
+.addSection:hover {
+  color: var(--color1);
+}
+
+/* SECTION CONTAINER */
+.sectionContainer {
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bgColor1Opacity);
+  z-index: 2;
+}
+
+.toggle {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* SECTION */
+.section {
+  position: relative;
+  width: 50%;
+  height: 40%;
+  border-radius: 10px;
+  background-color: var(--bgColor2);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.section p {
+  position: absolute;
+  top: 50px;
+}
+/* SECTION CONTAINER CLOSE BUTTON */
+
+.sectionContainerClose {
+  color: var(--color1Opacity);
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.sectionContainerClose:hover {
+  color: var(--color1);
+}
+
+/* COLUMN */
+.column {
+  background-color: var(--bgColor1);
+  height: 100px;
+  width: 100px;
+}
+
+/* COLUMN ONE */
+.columnOne {
+  background-color: var(--color1Opacity);
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.column.one:hover {
+  background-color: var(--color1);
+}
+
+/* COLUMN TWO */
+.column.two {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 5px;
+}
+
+.columnTwo {
+  background-color: var(--color1Opacity);
+}
+
+.column.two:hover .columnTwo {
+  background-color: var(--color1);
+}
+
+/* COLUMN THREE  */
+.column.three {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 5px;
+}
+
+.columnThree {
+  background-color: var(--color1Opacity);
+}
+
+.column.three:hover .columnThree {
+  background-color: var(--color1);
+}
+
+/* COLUMN FOUR  */
+.column.four {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 5px;
+}
+
+.columnFour {
+  background-color: var(--color1Opacity);
+}
+
+.column.four:hover .columnFour {
+  background-color: var(--color1);
+}
+
+/* ADD COLUMN ONE BOX */
+.columnOneBoxContainer {
+  width: 100%;
+  height: 400px;
+  background-color: var(--bgColor2);
+  display: grid;
+  grid-template-columns: 1fr;
+  position: relative;
+  z-index: 1;
+}
+
+.columnOneBox {
+  width: 100%;
+  height: 100%;
+}
+
+.columnOneBox:hover {
+  border: 5px solid var(--color2);
+}
+
+/* REMOVE COLUMN ONE BOX */
+.columnOneBoxContainerClose {
+  color: var(--color2);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* ADD MODULE */
+.module {
+  color: var(--color2Opacity);
+  cursor: pointer;
+  font-size: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.module:hover {
+  color: var(--color2);
+}
+/* COLUMN TWO BOX CONTAINER */
+.columnTwoBoxContainer {
+  width: 100%;
+  height: 400px;
+  background-color: var(--bgColor2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  z-index: 1;
+}
+
+/* COLUMN TWO(A) & TWO(B) BOX */
+.columnTwoABox,
+.columnTwoBBox {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.columnTwoABox:hover,
+.columnTwoBBox:hover {
+  border: 5px solid var(--color2);
+}
+
+/* REMOVE COLUMN TWO BOX */
+.columnTwoBoxContainerClose {
+  color: var(--color2);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.moduleTwoA,
+.moduleTwoB {
+  color: var(--color2Opacity);
+  cursor: pointer;
+  font-size: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.moduleTwoA:hover,
+.moduleTwoB:hover {
+  color: var(--color2);
+}
