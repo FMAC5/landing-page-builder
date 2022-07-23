@@ -4,82 +4,106 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LANDING PAGE BUILDER</title>
-
-    <!-- External Links -->
+    <title>Document</title>
+    <!-- EXTERNAL LINKS -->
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 </head>
 <body>
+<!-- MODAL MENU CONTAINER -->
+<div class="modalMenuContainer" id="modalMenuContainer">
+    <!-- MODAL MENU CLOSE -->
+    <i id="modalMenuClose" class="modalMenuClose"><span class="iconify" data-icon="eva:close-circle-fill"></span></i>
 
-<div class="mainMenu">
-    <h1>FM LANDING PAGE BUILDER</h1>
+    <!-- MODAL MENU TEXT -->
+    <h1>MODAL MENU</h1>
+    <p>CLICK A MODAL TO ADD IT</p>
+
+    <!-- MODAL MENU -->
+    <div class="modalMenu"">
+        <div class="modal heading" id="modalHeading"><span class="iconify" data-icon="bx:heading"></span></div>
+        <div class="modal text" id="modalText"><span class="iconify" data-icon="cil:text"></span></div>
+        <div class="modal image" id="modalImage"><span class="iconify" data-icon="bi:card-image"></span></div>
+        <div class="modal button" id="modalButton"><span class="iconify" data-icon="dashicons:button"></span></div>
+        <div class="modal video" id="modalVideo"><span class="iconify" data-icon="dashicons:format-video"></span></div>
+        <div class="modal form" id="modalForm"><span class="iconify" data-icon="fluent:form-28-filled"></span></div>
+    </div>
 </div>
 
-<!-- MODULE MENU -->
-<div class="moduleMenu" id="moduleMenu">
-    <div class="moduleContainer">
-        <i id="moduleMenuClose" class="moduleMenuClose"><span class="iconify" data-icon="eva:close-circle-fill"></span></i>
-        <p>CLICK A MODULE <br> TO ADD IT</p>
-    </div>
-    <div class="moduleBox">
-        <div class="moduleItem heading" id="heading"><span class="iconify" data-icon="bx:heading"></span></div>
-        <div class="moduleItem text"><span class="iconify" data-icon="cil:text"></span></div>
-        <div class="moduleItem image"><span class="iconify" data-icon="bi:card-image"></span></div>
-        <div class="moduleItem button"><span class="iconify" data-icon="dashicons:button"></span></div>
-        <div class="moduleItem video"><span class="iconify" data-icon="dashicons:format-video"></span></div>
-        <div class="moduleItem form"><span class="iconify" data-icon="fluent:form-28-filled"></span></div>
-    </div>
-</div>
-
-<!-- ADD SECTION -->
+<!-- ADD SECTION CONTAINER -->
 <div class="addSectionContainer">
-    <i id="addSection" class="addSection"><span class="iconify" data-icon="carbon:add-filled"></span></i>
+    <!-- ADD SECTION BUTTON -->
+    <i id="addSectionButton" class="addSectionButton"><span class="iconify" data-icon="carbon:add-filled"></span></i>
+    <!-- ADD SECTION TEXT -->
     <p>ADD A BLANK SECTION</p>
 </div>
 
-<!-- SECTION -->
+<!-- SECTION CONTAINER -->
 <div class="sectionContainer" id="sectionContainer">
+
+    <!-- SECTION -->
     <div class="section">
-        <p>CHOOSE A COLUMN</p>
-        <i class="sectionContainerClose" id="sectionContainerClose"><span class="iconify"
-                data-icon="eva:close-circle-fill"></span></i>
-        <!-- COLUMN -->
-        <div class="column" id="columnOne">
-            <div class="column one">
-                <div class="columnOne"></div>
-            </div>
-        </div>
-        <div class="column" id="columnTwo">
-            <div class="column two">
-                <div class="columnTwo"></div>
-                <div class="columnTwo"></div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="column three" id="columnThree">
-                <div class="columnThree"></div>
-                <div class="columnThree"></div>
-                <div class="columnThree"></div>
-            </div>
-        </div>
-        <div class="column" id="columnFour">
-            <div class="column four">
-                <div class="columnFour"></div>
-                <div class="columnFour"></div>
-                <div class="columnFour"></div>
-                <div class="columnFour"></div>
-            </div>
+
+        <!-- SECTION CONTAINER CLOSE -->
+        <i class="sectionClose" id="sectionClose"><span class="iconify" data-icon="eva:close-circle-fill"></span></i>
+
+        <!-- COLUMNS -->
+
+        <!-- COLUMN ONE -->
+        <div class="column one" id="columnOne">
+            <div class="columnOne"></div>
         </div>
 
+        <!-- COLUMN TWO -->
+        <div class="column two" id="columnTwo">
+            <div class="columnTwo"></div>
+            <div class="columnTwo"></div>
+        </div>
+
+        <!-- COLUMN THREE -->
+        <div class="column three" id="columnThree">
+            <div class="columnThree"></div>
+            <div class="columnThree"></div>
+            <div class="columnThree"></div>
+        </div>
+
+        <!-- COLUMN FOUR -->
+        <div class="column four" id="columnFour">
+            <div class="columnFour"></div>
+            <div class="columnFour"></div>
+            <div class="columnFour"></div>
+            <div class="columnFour"></div>
+        </div>
     </div>
 </div>
 
-<div class="moduleCanvas" id="moduleCanvas"></div>
-    <script defer src="index.js"></script>
+<!-- MODAL ELEMENTS -->
+<!-- HEADER MODAL -->
+<div class="modalHeaderContainer" id="modalHeaderContainer">
+    <!-- MODAL HEADER  -->
+    <div class="modalHeader">
+        <!-- MODAL HEADER CLOSE -->
+        <i id="modalHeaderClose" class="modalHeaderClose"><span class="iconify"
+                data-icon="eva:close-circle-fill"></span></i>
+
+        <!-- MODAL HEADER TEXT -->
+        <label for="headerInput">HEADER TEXT</label>
+        <form>
+            <input id="headerInput" class="headerInput" type="text">
+            <div class="headerButtonContainer">
+                <button class="headerSubmit" id="headerSubmit" type="button">SUBMIT</button>
+                <button class="headerClear" type="reset">CLEAR</button>
+        </form>
+        </div>
+        
+    </div>
+</div>
+<!-- CONTENT CONTAINER  -->
+<div class="contentContainer" id="contentContainer"></div>
+
 </body>
 </html>
