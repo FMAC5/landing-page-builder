@@ -1,322 +1,238 @@
-// ADD SECTION //
-let addSection = document.getElementById("addSection");
-let sectionContainer = document.getElementById("sectionContainer");
+// ADD SECTION BUTTON -> SECTION CONTAINER + SECTION CONTAINER CLOSE
+let addSectionButton = document.getElementById('addSectionButton');
+let sectionContainer = document.getElementById('sectionContainer');
+let sectionClose = document.getElementById('sectionClose');
 
-addSection.addEventListener("click", () => {
-  sectionContainer.classList.toggle("toggle");
-});
+    // ADD SECTION BUTTON -> SECTION CONTAINER
+    addSectionButton.addEventListener('click',()=> {
+        sectionContainer.classList.add('toggle');
+    });
 
-// CLOSE COLUMN //
-let sectionContainerClose = document.getElementById("sectionContainerClose");
+    // SECTION CONTAINER CLOSE
+    sectionClose.addEventListener('click',()=> {
+        sectionContainer.classList.remove('toggle');
+    });
 
-sectionContainerClose.addEventListener("click", () => {
-  sectionContainer.classList.toggle("toggle");
-});
+    sectionContainer.addEventListener('click',()=> {
+        sectionContainer.classList.remove('toggle');
+    });
 
-// ADD COLUMN ONE //
-let columnOne = document.getElementById("columnOne");
+// CONTENT CONTAINER + COLUMNS
+let contentContainer = document.getElementById('contentContainer');
+let columnOne = document.getElementById('columnOne');
+let columnTwo = document.getElementById('columnTwo');
+let columnThree = document.getElementById('columnThree');
+let columnFour = document.getElementById('columnFour');
 
-columnOne.addEventListener("click", () => {
-  sectionContainer.classList.toggle("toggle");
+// MODAL MENU CONTAINER & modal MENU CLOSE
+let modalMenuContainer = document.getElementById('modalMenuContainer');
+let modalMenuClose = document.getElementById('modalMenuClose');
 
-  let columnOneBoxContainer = document.createElement("div");
-  columnOneBoxContainer.classList.add("columnOneBoxContainer");
-  moduleCanvas.appendChild(columnOneBoxContainer);
-
-  // COLUMN ONE ELEMENT //
-  let columnOneBox = document.createElement("div");
-  columnOneBox.classList.add("columnOneBox");
-  columnOneBoxContainer.appendChild(columnOneBox);
-
-  // CLOSE BUTTON //
-  let columnOneBoxContainerClose = document.createElement("i");
-  columnOneBoxContainerClose.innerHTML =
-    '<span class="iconify" data-icon="eva:close-circle-fill"></span>';
-  columnOneBoxContainerClose.classList.add("columnOneBoxContainerClose");
-  columnOneBox.appendChild(columnOneBoxContainerClose);
-
-  // REMOVE COLUMN ONE //
-  columnOneBoxContainerClose.addEventListener("click", () => {
-    moduleCanvas.removeChild(columnOneBoxContainer);
-  });
-
-  // ADD MODULE //
-  let module = document.createElement("i");
-  module.innerHTML = '<span class="iconify" data-icon="carbon:add-alt"></span>';
-  module.classList.add("module");
-  columnOneBoxContainer.appendChild(module);
-
-  module.addEventListener("click", () => {
-    let moduleMenu = document.getElementById("moduleMenu");
-    moduleMenu.classList.toggle("toggle");
-    // MODULE CANVAS //
-    let moduleCanvas = document.getElementById("moduleCanvas");
-    moduleCanvas.classList.toggle("toggle");
-  });
-});
-
-let moduleMenuClose = document.getElementById("moduleMenuClose");
-moduleMenuClose.addEventListener("click", () => {
-  moduleCanvas.classList.toggle("toggle");
+modalMenuClose.addEventListener('click', ()=> {
+    modalMenuContainer.classList.remove('toggle');
+    contentContainer.classList.remove('toggle');
 })
 
-let heading = document.getElementById('heading');
-heading.addEventListener('click', ()=> {
-  console.log('test')
-  let headingElement = document.createElement('h1');
-  headingElement.textContent = 'Hello';
-  columnOneBox.appendChild(headingElement);
-});
+// MODAL ELEMENTS 
+let modalHeading = document.getElementById('modalHeading');
+    let modalHeaderContainer = document.getElementById('modalHeaderContainer');
+    let modalHeaderClose = document.getElementById('modalHeaderClose');
+    let headerInput = document.getElementById('headerInput');
+let modalText = document.getElementById('modalText');
+let modalImage = document.getElementById('modalImage');
+let modalButton = document.getElementById('modalButton');
+let modalVideo = document.getElementById('modalVideo');
+let modalForm = document.getElementById('modalForm');
 
-// ADD COLUMN TWO //
-let columnTwo = document.getElementById("columnTwo");
+    // COLUMN ONE 
+    columnOne.addEventListener('click', ()=> {
+        // SECTION CONTAINER CLOSE       
+        sectionContainer.classList.remove('toggle');
 
-columnTwo.addEventListener("click", () => {
-  sectionContainer.classList.toggle("toggle");
+        // ADD MAIN CONTAINER FOR DRAGGING
+        let mainContainer = document.createElement('div');
+        mainContainer.classList.add('mainContainer');
+        mainContainer.draggable = 'true';
+        contentContainer.appendChild(mainContainer);
+        
+        // DRAGGABLE 
+        const draggables = document.querySelectorAll('.mainContainer');
+        const containers = document.querySelectorAll('.contentContainer');
 
-  let columnTwoBoxContainer = document.createElement("div");
-  columnTwoBoxContainer.classList.add("columnTwoBoxContainer");
-  moduleCanvas.appendChild(columnTwoBoxContainer);
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', ()=> {
+                draggable.classList.add('dragging');
+            })
+            draggable.addEventListener('dragend', ()=> {
+                draggable.classList.remove('dragging');
+            })
 
-  // COLUMN TWO(A) ELEMENT //
-  let columnTwoABox = document.createElement("div");
-  columnTwoABox.classList.add("columnTwoABox");
-  columnTwoBoxContainer.appendChild(columnTwoABox);
+            containers.forEach(container => {
+                container.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    const afterElement = getDragAfterElement(container, e.clientY);
+                    const draggable = document.querySelector('.dragging');
+                    if (afterElement == null) {
+                        container.appendChild(draggable);
+                    } else {
+                        container.insertBefore(draggable, afterElement);
+                    }
+                })
+            })
+        })
 
-  // COLUMN TWO(B) ELEMENT //
-  let columnTwoBBox = document.createElement("div");
-  columnTwoBBox.classList.add("columnTwoBBox");
-  columnTwoBoxContainer.appendChild(columnTwoBBox);
+        function getDragAfterElement (container, y) {
+            const draggableElements = [...container.querySelectorAll('draggable:not(.dragging)')];
+            
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect()
+                const offset = y - box.top - box.height / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child}
+                } else {
+                        return closest
+                    }
+            }, {offset: Number.NEGATIVE_INFINITY}).element;
+        }
+        // ADD CONTAINER
+        let containerOne = document.createElement('div');
+        containerOne.classList.add('containerOne');
+        mainContainer.appendChild(containerOne);
 
-  // CLOSE BUTTON //
-  let columnTwoBoxContainerClose = document.createElement("i");
-  columnTwoBoxContainerClose.innerHTML =
-    '<span class="iconify" data-icon="eva:close-circle-fill"></span>';
-  columnTwoBoxContainerClose.classList.add("columnTwoBoxContainerClose");
-  columnTwoBoxContainer.appendChild(columnTwoBoxContainerClose);
+        // ADD CONTAINER BOX
+        let containerBoxOne = document.createElement('div');
+        containerBoxOne.classList.add('containerBoxOne');
+        containerOne.appendChild(containerBoxOne);
 
-  // REMOVE COLUMN TWO //
-  columnTwoBoxContainerClose.addEventListener("click", () => {
-    moduleCanvas.removeChild(columnTwoBoxContainer);
-  });
+        // CONTAINER BUTTON -> MODAL MENU
+        let modalMenuButton = document.createElement('i');
+        modalMenuButton.innerHTML = '<span class="iconify" data-icon="carbon:add-filled"></span>';
+        modalMenuButton.classList.add('modalMenuButton');
+        containerBoxOne.appendChild(modalMenuButton);
 
-  // ADD MODULE TWO(A) & TWO(B) //
-  let moduleTwoA = document.createElement("i");
-  moduleTwoA.innerHTML =
-    '<span class="iconify" data-icon="carbon:add-alt"></span>';
-  moduleTwoA.classList.add("moduleTwoA");
-  columnTwoABox.appendChild(moduleTwoA);
+        modalMenuButton.addEventListener('click', ()=> {
+        modalMenuContainer.classList.add('toggle');
+        contentContainer.classList.add('toggle');
 
-moduleTwoA.addEventListener("click", () => {
-let moduleMenu = document.getElementById("moduleMenu");
-moduleMenu.classList.toggle("toggle");
+        // MODAL
+            // HEADER
+            modalHeading.addEventListener('click', ()=> {
+                modalHeaderContainer.classList.add('toggle');
+                // HEADER INPUT
+                setTimeout(()=> {
+                headerInput.addEventListener('keydown', e => {
+                    if (e.key == 'Enter') {
+                        if (headerInput.value.length > 0) { 
+                        let headervalue = document.createElement('input');
+                        headervalue.textContent = headerInput.value;
+                        headervalue.type = 'text';
+                        headervalue.placeholder = headerInput.value;
+                        headervalue.readOnly = 'true';
+                        headervalue.classList.add('headervalue');
+                        containerBoxOne.appendChild(headervalue);
+                        modalHeaderContainer.classList.remove('toggle');
+                        e.preventDefault();  
 
-    // MODULE CANVAS //
-    let moduleCanvas = document.getElementById("moduleCanvas");
-    moduleCanvas.classList.toggle("toggle");
-});
+                            headervalue.addEventListener('click', ()=> {
+                            modalHeaderContainer.classList.add('toggle');
+                            containerBoxOne.removeChild(headervalue);
+                            })
+                        }
+                        else
+                            alert('Please Enter Valid Response');
+                            e.preventDefault(); 
+                    }
+                })
+                }, 0);
 
+                // HEADER SUBMIT
+                headerSubmit = document.getElementById('headerSubmit');
+                setTimeout(()=> {
+                headerSubmit.addEventListener('click', ()=> {
+                        if (headerInput.value.length > 0) { 
+                        let headervalue = document.createElement('input');
+                        headervalue.textContent = headerInput.value;
+                        headervalue.type = 'text';
+                        headervalue.placeholder = headerInput.value;
+                        headervalue.readOnly = 'true';
+                        headervalue.classList.add('headervalue');
+                        containerBoxOne.appendChild(headervalue);
+                        modalHeaderContainer.classList.remove('toggle');
 
-let moduleTwoB = document.createElement("i");
-moduleTwoB.innerHTML = '<span class="iconify" data-icon="carbon:add-alt"></span>';
-moduleTwoB.classList.add("moduleTwoB");
-columnTwoBBox.appendChild(moduleTwoB);
+                            headervalue.addEventListener('click', ()=> {
+                            modalHeaderContainer.classList.add('toggle');
+                            containerBoxOne.removeChild(headervalue);
+                            })
+                        }
+                        else
+                            alert('Please Enter Valid Response');
+                    })
+                }, 0);
+                // HEADER CLOSE
+                setTimeout(()=> {
+                modalHeaderClose.addEventListener('click', ()=> {
+                    modalHeaderContainer.classList.remove('toggle');
+                        let value = document.createElement('input');
+                        value.textContent = headerInput.value;
+                        value.type = 'text';
+                        value.classList.add('headervalue');
+                        value.placeholder = headerInput.value;
+                        containerBoxOne.appendChild(value);
 
-moduleTwoB.addEventListener("click", () => {
-let moduleMenu = document.getElementById("moduleMenu");
-moduleMenu.classList.toggle("toggle");
+                            value.addEventListener('click', ()=> {
+                            modalHeaderContainer.classList.add('toggle');
+                            containerBoxOne.removeChild(value);
+                            })
+                })
+                }, 0);
+            })
 
-    // MODULE CANVAS //
-    let moduleCanvas = document.getElementById("moduleCanvas");
-    moduleCanvas.classList.toggle("toggle");
-});
+        })
+    })
 
-});
+    // COLUMN TWO 
+    columnTwo.addEventListener('click', ()=> {
+        // SECTION CONTAINER CLOSE       
+        sectionContainer.classList.remove('toggle');
 
-// ADD COLUMN THREE //
-let columnThree = document.getElementById("columnThree");
+        // ADD MAIN CONTAINER FOR DRAGGING
+        let mainContainer = document.createElement('div');
+        mainContainer.classList.add('mainContainer');
+        mainContainer.draggable = 'true';
+        contentContainer.appendChild(mainContainer);
+        
+        // ADD CONTAINER
+        let containerTwo = document.createElement('div');
+        containerTwo.classList.add('containerTwo');
+        mainContainer.appendChild(containerTwo);
 
-columnThree.addEventListener("click", () => {
-  sectionContainer.classList.toggle("toggle");
+        // ADD CONTAINER BOX TWOA
+        let containerBoxTwoA = document.createElement('div');
+        containerBoxTwoA.classList.add('containerBoxTwoA');
+        containerTwo.appendChild(containerBoxTwoA);
 
-  let columnThreeBoxContainer = document.createElement("div");
-  columnThreeBoxContainer.classList.add("columnThreeBoxContainer");
-  moduleCanvas.appendChild(columnThreeBoxContainer);
+        // ADD CONTAINER BOX TWOB
+        let containerBoxTwoB = document.createElement('div');
+        containerBoxTwoB.classList.add('containerBoxTwoB');
+        containerTwo.appendChild(containerBoxTwoB);
 
-// COLUMN THREE (A) ELEMENT //
-let columnThreeABox = document.createElement("div");
-columnThreeABox.classList.add("columnThreeABox");
-columnThreeBoxContainer.appendChild(columnThreeABox);
+        // CONTAINER BUTTON -> MODAL MENU
+        let modalMenuButton2A = document.createElement('i');
+        modalMenuButton2A.innerHTML = '<span class="iconify" data-icon="carbon:add-filled"></span>';
+        modalMenuButton2A.classList.add('modalMenuButton');
+        containerBoxTwoA.appendChild(modalMenuButton2A);
 
-// COLUMN THREE (B) ELEMENT //
-let columnThreeBBox = document.createElement("div");
-columnThreeBBox.classList.add("columnThreeBBox");
-columnThreeBoxContainer.appendChild(columnThreeBBox);
+        let modalMenuButton2B = document.createElement('i');
+        modalMenuButton2B.innerHTML = '<span class="iconify" data-icon="carbon:add-filled"></span>';
+        modalMenuButton2B.classList.add('modalMenuButton');
+        containerBoxTwoB.appendChild(modalMenuButton2B);
 
-// COLUMN THREE (C) ELEMENT //
-let columnThreeCBox = document.createElement("div");
-columnThreeCBox.classList.add("columnThreeCBox");
-columnThreeBoxContainer.appendChild(columnThreeCBox);
-
-// CLOSE BUTTON //
-let columnThreeBoxContainerClose = document.createElement("i");
-columnThreeBoxContainerClose.innerHTML =
-  '<span class="iconify" data-icon="eva:close-circle-fill"></span>';
-columnThreeBoxContainerClose.classList.add("columnTwoBoxContainerClose");
-columnThreeBoxContainer.appendChild(columnThreeBoxContainerClose);
-
-// REMOVE COLUMN THREE  //
-columnThreeBoxContainerClose.addEventListener("click", () => {
-  moduleCanvas.removeChild(columnThreeBoxContainer);
-});
-
- // ADD MODULE THREE (A) & THREE (B) & THREE (C) //
- let moduleThreeA = document.createElement("i");
- moduleThreeA.innerHTML =
-   '<span class="iconify" data-icon="carbon:add-alt"></span>';
-  moduleThreeA.classList.add("moduleThreeA");
- columnThreeABox.appendChild(moduleThreeA);
-
-moduleThreeA.addEventListener("click", () => {
-let moduleMenu = document.getElementById("moduleMenu");
-moduleMenu.classList.toggle("toggle");
-
-// MODULE CANVAS //
-let moduleCanvas = document.getElementById("moduleCanvas");
-moduleCanvas.classList.toggle("toggle");
-});
-
-let moduleThreeB = document.createElement("i");
-moduleThreeB.innerHTML = '<span class="iconify" data-icon="carbon:add-alt"></span>';
-moduleThreeB.classList.add("moduleTwoB");
-columnThreeBBox.appendChild(moduleThreeB);
-
-moduleThreeB.addEventListener("click", () => {
-let moduleMenu = document.getElementById("moduleMenu");
-moduleMenu.classList.toggle("toggle");
-
-// MODULE CANVAS //
-let moduleCanvas = document.getElementById("moduleCanvas");
-moduleCanvas.classList.toggle("toggle");
-});
-
-let moduleThreeC = document.createElement("i");
-moduleThreeC.innerHTML = '<span class="iconify" data-icon="carbon:add-alt"></span>';
-moduleThreeC.classList.add("moduleTwoB");
-columnThreeCBox.appendChild(moduleThreeC);
-
-moduleThreeC.addEventListener("click", () => {
-let moduleMenu = document.getElementById("moduleMenu");
-moduleMenu.classList.toggle("toggle");
-
-// MODULE CANVAS //
-let moduleCanvas = document.getElementById("moduleCanvas");
-moduleCanvas.classList.toggle("toggle");
-});
-
-});
-
-
-// ADD COLUMN FOUR //
-let columnFour = document.getElementById("columnFour");
-
-columnFour.addEventListener("click", () => {
-sectionContainer.classList.toggle("toggle");
-
-let columnFourBoxContainer = document.createElement("div");
-columnFourBoxContainer.classList.add("columnFourBoxContainer");
-moduleCanvas.appendChild(columnFourBoxContainer);
-
-// COLUMN THREE (A) ELEMENT //
-let columnFourABox = document.createElement("div");
-columnFourABox.classList.add("columnFourABox");
-columnFourBoxContainer.appendChild(columnFourABox);
-
-// COLUMN THREE (B) ELEMENT //
-let columnFourBBox = document.createElement("div");
-columnFourBBox.classList.add("columnFourBBox");
-columnFourBoxContainer.appendChild(columnFourBBox);
-
-// COLUMN THREE (C) ELEMENT //
-let columnFourCBox = document.createElement("div");
-columnFourCBox.classList.add("columnFourCBox");
-columnFourBoxContainer.appendChild(columnFourCBox);
-
-// COLUMN THREE (D) ELEMENT //
-let columnFourDBox = document.createElement("div");
-columnFourDBox.classList.add("columnFourDBox");
-columnFourBoxContainer.appendChild(columnFourDBox);
-
-// CLOSE BUTTON //
-let columnFourBoxContainerClose = document.createElement("i");
-columnFourBoxContainerClose.innerHTML =
-  '<span class="iconify" data-icon="eva:close-circle-fill"></span>';
-  columnFourBoxContainerClose.classList.add("columnFourBoxContainerClose");
-columnFourBoxContainer.appendChild(columnFourBoxContainerClose);
-
-// REMOVE COLUMN FOUR  //
-columnFourBoxContainerClose.addEventListener("click", () => {
-  moduleCanvas.removeChild(columnFourBoxContainer);
-});
-
-// 
-
- // ADD MODULE THREE (A) & THREE (B) & THREE (C) //
- let moduleFourA = document.createElement("i");
- moduleFourA.innerHTML =
-   '<span class="iconify" data-icon="carbon:add-alt"></span>';
-  moduleFourA.classList.add("moduleFourA");
- columnFourABox.appendChild(moduleFourA);
-
- moduleFourA.addEventListener("click", () => {
-let moduleMenu = document.getElementById("moduleMenu");
-moduleMenu.classList.toggle("toggle");
-
-// MODULE CANVAS //
-let moduleCanvas = document.getElementById("moduleCanvas");
-moduleCanvas.classList.toggle("toggle");
-});
-
-  let moduleFourB = document.createElement("i");
-  moduleFourB.innerHTML = '<span class="iconify" data-icon="carbon:add-alt"></span>';
-  moduleFourB.classList.add("moduleFourB");
-  columnFourBBox.appendChild(moduleFourB);
-
-  moduleFourB.addEventListener("click", () => {
-  let moduleMenu = document.getElementById("moduleMenu");
-  moduleMenu.classList.toggle("toggle");
-
-  // MODULE CANVAS //
-  let moduleCanvas = document.getElementById("moduleCanvas");
-  moduleCanvas.classList.toggle("toggle");
-  });
-
-let moduleFourC = document.createElement("i");
-moduleFourC.innerHTML = '<span class="iconify" data-icon="carbon:add-alt"></span>';
-moduleFourC.classList.add("moduleFourC");
-columnFourCBox.appendChild(moduleFourC);
-
-moduleFourC.addEventListener("click", () => {
-let moduleMenu = document.getElementById("moduleMenu");
-moduleMenu.classList.toggle("toggle");
-
-// MODULE CANVAS //
-let moduleCanvas = document.getElementById("moduleCanvas");
-moduleCanvas.classList.toggle("toggle");
-});
-
-let moduleFourD = document.createElement("i");
-moduleFourD.innerHTML = '<span class="iconify" data-icon="carbon:add-alt"></span>';
-moduleFourD.classList.add("moduleFourD");
-columnFourDBox.appendChild(moduleFourD);
-
-moduleFourD.addEventListener("click", () => {
-let moduleMenu = document.getElementById("moduleMenu");
-moduleMenu.classList.toggle("toggle");
-
-// MODULE CANVAS //
-let moduleCanvas = document.getElementById("moduleCanvas");
-moduleCanvas.classList.toggle("toggle");
-});
-});
-
+        modalMenuButton2A.addEventListener('click', ()=> {
+        modalMenuContainer.classList.add('toggle');
+        contentContainer.classList.add('toggle');
+        })
+        modalMenuButton2B.addEventListener('click', ()=> {
+        modalMenuContainer.classList.add('toggle');
+        contentContainer.classList.add('toggle');
+        })
+    })
